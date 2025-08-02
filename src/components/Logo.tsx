@@ -8,6 +8,7 @@ interface LogoProps {
   variant?: 'default' | 'white' | 'inverted'
   className?: string
   showText?: boolean
+  logoSrc?: string
 }
 
 const sizeMap = {
@@ -17,7 +18,7 @@ const sizeMap = {
   xl: 64
 }
 
-export function Logo({ size = 'md', variant = 'default', className, showText = true }: LogoProps) {
+export function Logo({ size = 'md', variant = 'default', className, showText = true, logoSrc = '/logo.svg' }: LogoProps) {
   const logoSize = sizeMap[size]
   
   return (
@@ -31,7 +32,7 @@ export function Logo({ size = 'md', variant = 'default', className, showText = t
         }}
       >
         <Image
-          src="/logo.svg"
+          src={logoSrc}
           alt="StatementSync Logo"
           width={logoSize}
           height={logoSize}
