@@ -1,0 +1,171 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String
+  credits   Int      @default(1) // Free credit for new users
+  planType  String   @default("FREE")
+  isEmailVerified Boolean @default(false)
+  emailVerificationToken String?
+  passwordResetToken String?
+  passwordResetExpires DateTime?
+  
+  // Relationships
+  statements     Statement[]
+  payments       Payment[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Statement {
+  id               String            @id @default(cuid())
+  userId           String
+  filename         String
+  originalFilename String
+  fileUrl          String?
+  fileSize         Int
+  fileType         String
+  status           String            @default("UPLOADING")
+  processingProgress Int             @default(0)
+  extractedText    String?
+  
+  // OCR and Processing Results
+  ocrConfidence    Float?
+  processingErrors String?
+  processingSteps  String?             // Store processing step details as JSON string
+  
+  // Statement Metadata
+  accountNumber    String?
+  bankName         String?
+  statementPeriodFrom DateTime?
+  statementPeriodTo   DateTime?
+  openingBalance   Float?
+  closingBalance   Float?
+  
+  // Relationships
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions Transaction[]
+  exports      Export[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("statements")
+}
+
+model Transaction {
+  id          String          @id @default(cuid())
+  statementId String
+  date        DateTime
+  description String
+  amount      Float
+  balance     Float?
+  type        String
+  category    String          @default("Uncategorized")
+  confidence  Float           @default(0.0)
+  isVerified  Boolean         @default(false)
+  originalText String?
+  
+  // Additional metadata
+  referenceNumber String?
+  chequeNumber    String?
+  
+  // Relationships
+  statement Statement @relation(fields: [statementId], references: [id], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("transactions")
+}
+
+model Export {
+  id          String     @id @default(cuid())
+  statementId String
+  userId      String
+  format      String
+  filename    String
+  fileUrl     String?
+  fileSize    Int?
+  
+  // Export filters/options
+  exportOptions String?
+  
+  // Relationships
+  statement Statement @relation(fields: [statementId], references: [id], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+  
+  @@map("exports")
+}
+
+model Payment {
+  id                String        @id @default(cuid())
+  userId            String
+  amount            Float
+  currency          String        @default("INR")
+  status            String        @default("PENDING")
+  
+  // Razorpay details
+  razorpayOrderId   String        @unique
+  razorpayPaymentId String?       @unique
+  razorpaySignature String?
+  
+  // Credits
+  creditsAdded      Int
+  
+  // Metadata
+  paymentMethod     String?
+  failureReason     String?
+  
+  // Relationships
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("payments")
+}
+
+model ActivityLog {
+  id          String      @id @default(cuid())
+  userId      String?
+  action      String
+  details     String?
+  ipAddress   String?
+  userAgent   String?
+  
+  createdAt DateTime @default(now())
+
+  @@map("activity_logs")
+}
+
+model SystemConfig {
+  id    String @id @default(cuid())
+  key   String @unique
+  value String
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("system_config")
+}
+
+// Note: Using strings instead of enums for SQLite compatibility
+// PlanType: "FREE" | "PAID"
+// ProcessingStatus: "UPLOADING" | "PROCESSING" | "COMPLETED" | "FAILED"
+// TransactionType: "DEBIT" | "CREDIT" | "TRANSFER"
+// ExportFormat: "CSV" | "XLSX" | "PDF"
+// PaymentStatus: "PENDING" | "COMPLETED" | "FAILED" | "REFUNDED"

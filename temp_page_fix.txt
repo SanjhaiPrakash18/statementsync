@@ -1,0 +1,18 @@
+            {!isProcessing ? (
+              <FileUploader
+                onFilesSelected={handleFilesSelected}
+                maxFiles={3}
+                className="animate-fade-in"
+                disabled={isProcessing}
+              />
+            ) : (
+              <ClientOnly fallback={<div className="text-center py-12">Loading processing status...</div>}>
+                <ProcessingStatus
+                  filename={files[0]?.name || 'bank-statement.pdf'}
+                  currentStep={currentStep}
+                  progress={processingProgress}
+                  steps={steps}
+                  className="animate-fade-in"
+                />
+              </ClientOnly>
+            )}
