@@ -31,13 +31,13 @@ export function ProcessingStatus({
 
   const getStepIcon = (step: ProcessingStep, _index: number) => {
     if (step.status === 'completed') {
-      return <CheckCircle className="h-5 w-5 text-green-500" />
+      return <CheckCircle className="h-5 w-5 text-foreground" />
     } else if (step.status === 'failed') {
-      return <AlertCircle className="h-5 w-5 text-red-500" />
+      return <AlertCircle className="h-5 w-5 text-muted-foreground" />
     } else if (step.status === 'processing') {
-      return <Loader2 className="h-5 w-5 text-blue-500 animate-spin" />
+      return <Loader2 className="h-5 w-5 text-foreground animate-spin" />
     } else {
-      return <Circle className="h-5 w-5 text-gray-300" />
+      return <Circle className="h-5 w-5 text-muted" />
     }
   }
 
@@ -52,14 +52,14 @@ export function ProcessingStatus({
       <CardHeader>
         <CardTitle className="flex items-center justify-between">
           <span>Processing Statement</span>
-          <span className="text-sm font-normal text-gray-500">{progress}%</span>
+          <span className="text-sm font-normal text-muted-foreground">{progress}%</span>
         </CardTitle>
-        <p className="text-sm text-gray-600 truncate">{filename}</p>
+        <p className="text-sm text-muted-foreground truncate">{filename}</p>
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="space-y-2">
           <Progress value={progress} className="h-3" />
-          <div className="flex justify-between text-xs text-gray-500">
+          <div className="flex justify-between text-xs text-muted-foreground">
             <span>Processing...</span>
             <span>{progress}% complete</span>
           </div>
@@ -75,9 +75,9 @@ export function ProcessingStatus({
                 key={step.id}
                 className={cn(
                   "flex items-start space-x-3 p-3 rounded-lg transition-colors",
-                  isActive && "bg-blue-50 border border-blue-200",
-                  status === 'completed' && "bg-green-50",
-                  status === 'failed' && "bg-red-50"
+                  isActive && "bg-muted/50 border border-border",
+                  status === 'completed' && "bg-muted/30",
+                  status === 'failed' && "bg-muted/30"
                 )}
               >
                 <div className="flex-shrink-0 mt-0.5">
@@ -87,16 +87,16 @@ export function ProcessingStatus({
                 <div className="flex-1 min-w-0">
                   <h4 className={cn(
                     "text-sm font-medium",
-                    status === 'completed' && "text-green-700",
-                    status === 'failed' && "text-red-700",
-                    status === 'processing' && "text-blue-700",
-                    status === 'pending' && "text-gray-500"
+                    status === 'completed' && "text-foreground",
+                    status === 'failed' && "text-muted-foreground",
+                    status === 'processing' && "text-foreground",
+                    status === 'pending' && "text-muted-foreground"
                   )}>
                     {step.name}
                   </h4>
                   
                   {step.message && (
-                    <p className="text-xs text-gray-600 mt-1">
+                    <p className="text-xs text-muted-foreground mt-1">
                       {step.message}
                     </p>
                   )}
@@ -104,7 +104,7 @@ export function ProcessingStatus({
                   {status === 'processing' && step.progress > 0 && (
                     <div className="mt-2">
                       <Progress value={step.progress} className="h-2" />
-                      <span className="text-xs text-gray-500 mt-1 block">
+                      <span className="text-xs text-muted-foreground mt-1 block">
                         {step.progress}%
                       </span>
                     </div>
@@ -114,10 +114,10 @@ export function ProcessingStatus({
                 <div className="flex-shrink-0">
                   <span className={cn(
                     "text-xs px-2 py-1 rounded-full",
-                    status === 'completed' && "bg-green-100 text-green-700",
-                    status === 'failed' && "bg-red-100 text-red-700",
-                    status === 'processing' && "bg-blue-100 text-blue-700",
-                    status === 'pending' && "bg-gray-100 text-gray-500"
+                    status === 'completed' && "bg-muted text-foreground",
+                    status === 'failed' && "bg-muted text-muted-foreground",
+                    status === 'processing' && "bg-muted text-foreground",
+                    status === 'pending' && "bg-muted text-muted-foreground"
                   )}>
                     {status}
                   </span>
@@ -127,9 +127,9 @@ export function ProcessingStatus({
           })}
         </div>
 
-        <div className="bg-gray-50 rounded-lg p-4">
-          <h4 className="text-sm font-medium text-gray-700 mb-2">Processing Details</h4>
-          <div className="space-y-1 text-xs text-gray-600">
+        <div className="bg-muted rounded-lg p-4">
+                      <h4 className="text-sm font-medium text-foreground mb-2">Processing Details</h4>
+            <div className="space-y-1 text-xs text-muted-foreground">
             <div className="flex justify-between">
               <span>File Size:</span>
               <span>2.4 MB</span>
@@ -151,8 +151,8 @@ export function ProcessingStatus({
 
         {progress < 100 && (
           <div className="text-center py-4">
-            <div className="inline-flex items-center space-x-2 text-sm text-gray-600">
-              <Loader2 className="h-4 w-4 animate-spin text-blue-500" />
+            <div className="inline-flex items-center space-x-2 text-sm text-muted-foreground">
+              <Loader2 className="h-4 w-4 animate-spin text-foreground" />
               <span className="processing-dots">Processing your statement</span>
             </div>
           </div>
