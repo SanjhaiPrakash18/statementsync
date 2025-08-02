@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useCallback, useState } from 'react'
-import { useDropzone } from 'react-dropzone'
+import { useDropzone, FileRejection } from 'react-dropzone'
 import { Upload, FileText, X, AlertCircle, CheckCircle } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -30,7 +30,7 @@ export function FileUploader({
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([])
   const [errors, setErrors] = useState<string[]>([])
 
-  const onDrop = useCallback((acceptedFiles: File[], rejectedFiles: any[]) => {
+  const onDrop = useCallback((acceptedFiles: File[], _rejectedFiles: FileRejection[]) => {
     const newErrors: string[] = []
     
     const validFiles = acceptedFiles.filter(file => {
