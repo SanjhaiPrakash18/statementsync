@@ -82,18 +82,15 @@ export function FileUploader({
   }
 
   const getFileIcon = (file: File) => {
-    if (file.type === 'application/pdf') {
-      return <FileText className="h-8 w-8 text-red-500" />
-    }
-    return <FileText className="h-8 w-8 text-blue-500" />
+    return <FileText className="h-8 w-8 text-muted-foreground" />
   }
 
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'completed':
-        return <CheckCircle className="h-4 w-4 text-green-500" />
+        return <CheckCircle className="h-4 w-4 text-foreground" />
       case 'failed':
-        return <AlertCircle className="h-4 w-4 text-red-500" />
+        return <AlertCircle className="h-4 w-4 text-muted-foreground" />
       default:
         return null
     }
@@ -111,14 +108,14 @@ export function FileUploader({
         <CardContent className="p-8">
           <div {...getRootProps()} className="text-center">
             <input {...getInputProps()} />
-            <Upload className="mx-auto h-12 w-12 text-gray-400 mb-4" />
+            <Upload className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
             <h3 className="text-lg font-semibold mb-2">
               {isDragActive ? "Drop files here" : "Upload Bank Statements"}
             </h3>
-            <p className="text-sm text-gray-600 mb-4">
+            <p className="text-sm text-muted-foreground mb-4">
               Drag & drop your files here, or click to browse
             </p>
-            <p className="text-xs text-gray-500 mb-4">
+            <p className="text-xs text-muted-foreground mb-4">
               Supports PDF, JPG, PNG files up to {maxSizeMB}MB each (Max {maxFiles} files)
             </p>
             <Button variant="outline" disabled={disabled}>
@@ -129,13 +126,13 @@ export function FileUploader({
       </Card>
 
       {errors.length > 0 && (
-        <Card className="border-red-200 bg-red-50">
+        <Card className="border-muted bg-muted/30">
           <CardContent className="p-4">
             <div className="flex items-start">
-              <AlertCircle className="h-5 w-5 text-red-500 mt-0.5 mr-2 flex-shrink-0" />
+              <AlertCircle className="h-5 w-5 text-muted-foreground mt-0.5 mr-2 flex-shrink-0" />
               <div>
-                <h4 className="text-sm font-medium text-red-800 mb-1">Upload Errors</h4>
-                <ul className="text-sm text-red-700 space-y-1">
+                <h4 className="text-sm font-medium text-foreground mb-1">Upload Errors</h4>
+                <ul className="text-sm text-muted-foreground space-y-1">
                   {errors.map((error, index) => (
                     <li key={index}>• {error}</li>
                   ))}
@@ -158,25 +155,25 @@ export function FileUploader({
                     <div className="flex items-center space-x-3 flex-1">
                       {getFileIcon(file)}
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate">
+                        <p className="text-sm font-medium text-foreground truncate">
                           {file.name}
                         </p>
-                        <p className="text-xs text-gray-500">
+                        <p className="text-xs text-muted-foreground">
                           {formatFileSize(file.size)}
                         </p>
                         {progress && (
                           <div className="mt-2">
                             <div className="flex items-center justify-between mb-1">
-                              <span className="text-xs text-gray-600 capitalize">
+                              <span className="text-xs text-muted-foreground capitalize">
                                 {progress.stage}
                               </span>
-                              <span className="text-xs text-gray-600">
-                                {progress.progress}%
-                              </span>
+                                                              <span className="text-xs text-muted-foreground">
+                                  {progress.progress}%
+                                </span>
                             </div>
                             <Progress value={progress.progress} className="h-2" />
                             {progress.message && (
-                              <p className="text-xs text-gray-500 mt-1">
+                              <p className="text-xs text-muted-foreground mt-1">
                                 {progress.message}
                               </p>
                             )}
