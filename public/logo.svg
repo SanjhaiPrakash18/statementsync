@@ -1,33 +1,31 @@
 <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-opacity="0.1"/>
-    </filter>
-  </defs>
+  <!-- Black rounded background -->
+  <rect x="0" y="0" width="120" height="120" rx="24" ry="24" fill="#000000"/>
   
-  <!-- Main document background -->
-  <rect x="15" y="15" width="90" height="90" rx="12" ry="12" fill="currentColor" filter="url(#shadow)"/>
+  <!-- White document shape -->
+  <rect x="20" y="16" width="64" height="88" rx="8" ry="8" fill="#ffffff"/>
   
-  <!-- Document content area -->
-  <rect x="25" y="25" width="70" height="70" rx="6" ry="6" fill="white"/>
+  <!-- Document content lines -->
+  <rect x="28" y="28" width="36" height="3" rx="1.5" fill="#000000"/>
+  <rect x="28" y="36" width="36" height="3" rx="1.5" fill="#000000"/>
+  <rect x="28" y="44" width="20" height="3" rx="1.5" fill="#000000"/>
   
-  <!-- Document header lines -->
-  <rect x="32" y="35" width="40" height="2" rx="1" fill="currentColor" opacity="0.8"/>
-  <rect x="32" y="42" width="40" height="2" rx="1" fill="currentColor" opacity="0.8"/>
-  <rect x="32" y="49" width="25" height="2" rx="1" fill="currentColor" opacity="0.6"/>
-  
-  <!-- Dollar sign circle -->
-  <circle cx="60" cy="67" r="15" fill="currentColor"/>
-  <text x="60" y="73" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="white">$</text>
-  
-  <!-- Transfer arrows -->
-  <g transform="translate(78, 32)">
-    <!-- Outgoing arrow -->
-    <path d="M0 0 L8 0 L6 -2 M8 0 L6 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.8"/>
+  <!-- Transfer arrows on the right -->
+  <g transform="translate(88, 24)">
+    <!-- Top curved arrow (outgoing) -->
+    <path d="M 0 8 Q 8 8 8 0 L 12 0" stroke="#ffffff" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <path d="M 10 -2 L 12 0 L 10 2" stroke="#ffffff" stroke-width="3" stroke-linecap="round" fill="none"/>
   </g>
   
-  <g transform="translate(78, 42)">
-    <!-- Incoming arrow -->
-    <path d="M8 0 L0 0 L2 -2 M0 0 L2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.8"/>
+  <g transform="translate(88, 40)">
+    <!-- Bottom curved arrow (incoming) -->
+    <path d="M 12 0 Q 4 0 4 8 L 0 8" stroke="#ffffff" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <path d="M 2 6 L 0 8 L 2 10" stroke="#ffffff" stroke-width="3" stroke-linecap="round" fill="none"/>
   </g>
+  
+  <!-- Black section at bottom of document -->
+  <rect x="20" y="64" width="64" height="40" rx="0" ry="0" fill="#000000"/>
+  
+  <!-- White dollar sign in black section -->
+  <text x="52" y="90" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#ffffff">$</text>
 </svg>
