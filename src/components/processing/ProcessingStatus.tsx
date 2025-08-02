@@ -29,7 +29,7 @@ export function ProcessingStatus({
     setStartTime(new Date().toLocaleTimeString())
   }, [])
 
-  const getStepIcon = (step: ProcessingStep, index: number) => {
+  const getStepIcon = (step: ProcessingStep, _index: number) => {
     if (step.status === 'completed') {
       return <CheckCircle className="h-5 w-5 text-green-500" />
     } else if (step.status === 'failed') {
