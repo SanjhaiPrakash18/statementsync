@@ -28,7 +28,7 @@ export function Logo({ size = 'md', variant = 'default', className, showText = t
         style={{ 
           width: logoSize, 
           height: logoSize,
-          filter: variant === 'white' ? 'brightness(0) invert(1)' : variant === 'inverted' ? 'brightness(0) invert(1)' : 'none'
+          filter: logoSrc === '/footerlogo.svg' ? 'none' : variant === 'white' ? 'brightness(0) invert(1)' : variant === 'inverted' ? 'brightness(0) invert(1)' : 'none'
         }}
       >
         <Image
