@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Upload, FileText, Zap, Shield, Download, CheckCircle, Clock, Star } from 'lucide-react'
 import { UploadProgress } from '@/types'
+import { PricingCard } from '@/components/PricingCard'
 
 export default function HomePage() {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([])
@@ -28,17 +29,17 @@ export default function HomePage() {
 
   const features = [
     {
-      icon: <Zap className="h-6 w-6 text-blue-600" />,
+      icon: <Zap className="h-6 w-6" />,
       title: "Lightning Fast OCR",
       description: "Advanced AI extracts data from your statements in under 2 minutes"
     },
     {
-      icon: <Shield className="h-6 w-6 text-green-600" />,
+      icon: <Shield className="h-6 w-6" />,
       title: "Bank-Grade Security",
       description: "Your financial data is encrypted and automatically deleted after processing"
     },
     {
-      icon: <Download className="h-6 w-6 text-purple-600" />,
+      icon: <Download className="h-6 w-6" />,
       title: "Multiple Formats",
       description: "Download as Excel, CSV, or PDF with clean, organized transaction data"
     }
@@ -51,22 +52,75 @@ export default function HomePage() {
     { icon: <CheckCircle className="h-5 w-5" />, label: "Happy Users", value: "10,000+" }
   ]
 
+  const pricingPlans = [
+    {
+      name: "Starter",
+      price: "Free",
+      description: "Perfect for trying out our service",
+      features: [
+        "5 statements per month",
+        "Basic OCR processing",
+        "Excel & CSV export",
+        "Email support"
+      ],
+      buttonText: "Get Started",
+      popular: false,
+      planId: "starter"
+    },
+    {
+      name: "Professional",
+      price: "$19",
+      period: "/month",
+      description: "Best for small businesses and freelancers",
+      features: [
+        "100 statements per month",
+        "Advanced OCR processing",
+        "Excel, CSV & PDF export",
+        "Priority email support",
+        "Batch processing",
+        "API access"
+      ],
+      buttonText: "Start Free Trial",
+      popular: true,
+      planId: "professional"
+    },
+    {
+      name: "Enterprise",
+      price: "$99",
+      period: "/month",
+      description: "For large organizations with high volume needs",
+      features: [
+        "Unlimited statements",
+        "Premium OCR processing",
+        "All export formats",
+        "24/7 phone support",
+        "Custom integrations",
+        "Dedicated account manager",
+        "SLA guarantee",
+        "Custom branding"
+      ],
+      buttonText: "Contact Sales",
+      popular: false,
+      planId: "enterprise"
+    }
+  ]
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+      <header className="border-b bg-background/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-2 rounded-lg">
-                <FileText className="h-6 w-6 text-white" />
+              <div className="bg-primary p-2 rounded-lg">
+                <FileText className="h-6 w-6 text-primary-foreground" />
               </div>
               <span className="text-xl font-bold gradient-text">StatementSync</span>
             </div>
             <nav className="hidden md:flex items-center space-x-6">
-              <a href="#features" className="text-gray-600 hover:text-gray-900 transition-colors">Features</a>
-              <a href="#pricing" className="text-gray-600 hover:text-gray-900 transition-colors">Pricing</a>
-              <a href="#contact" className="text-gray-600 hover:text-gray-900 transition-colors">Contact</a>
+              <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Features</a>
+              <a href="#pricing" className="text-muted-foreground hover:text-foreground transition-colors">Pricing</a>
+              <a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact</a>
               <Button variant="outline">Sign In</Button>
               <Button>Get Started</Button>
             </nav>
@@ -78,11 +132,11 @@ export default function HomePage() {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+            <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
               Transform Bank Statements to{' '}
               <span className="gradient-text">Excel in Seconds</span>
             </h1>
-            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               Upload your PDF, JPG, or PNG bank statements and get clean, formatted Excel files instantly. 
               No more manual data entry.
             </p>
@@ -92,22 +146,22 @@ export default function HomePage() {
               {stats.map((stat, index) => (
                 <Card key={index} className="p-4">
                   <CardContent className="p-0 text-center">
-                    <div className="flex items-center justify-center mb-2 text-blue-600">
+                    <div className="flex items-center justify-center mb-2 text-foreground">
                       {stat.icon}
                     </div>
-                    <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
-                    <div className="text-sm text-gray-600">{stat.label}</div>
+                    <div className="text-2xl font-bold text-foreground">{stat.value}</div>
+                    <div className="text-sm text-muted-foreground">{stat.label}</div>
                   </CardContent>
                 </Card>
               ))}
             </div>
 
             {/* File Upload Section */}
-            <Card className="max-w-3xl mx-auto shadow-xl border-0 bg-white/90 backdrop-blur-sm">
+            <Card className="max-w-3xl mx-auto shadow-xl border-0 bg-card/90 backdrop-blur-sm">
               <CardContent className="p-8">
                 <div className="mb-6">
-                  <h3 className="text-2xl font-semibold text-gray-900 mb-2">Upload Bank Statements</h3>
-                  <p className="text-gray-600">
+                  <h3 className="text-2xl font-semibold text-foreground mb-2">Upload Bank Statements</h3>
+                  <p className="text-muted-foreground">
                     Drag & drop your files here, or click to browse
                   </p>
                 </div>
@@ -121,17 +175,17 @@ export default function HomePage() {
                   className="w-full"
                 />
 
-                <div className="mt-6 flex items-center justify-center space-x-6 text-sm text-gray-500">
+                <div className="mt-6 flex items-center justify-center space-x-6 text-sm text-muted-foreground">
                   <div className="flex items-center space-x-2">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
+                    <CheckCircle className="h-4 w-4 text-foreground" />
                     <span>Bank-grade security</span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
+                    <CheckCircle className="h-4 w-4 text-foreground" />
                     <span>2-minute processing</span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <CheckCircle className="h-4 w-4 text-green-500" />
+                    <CheckCircle className="h-4 w-4 text-foreground" />
                     <span>99% accuracy</span>
                   </div>
                 </div>
@@ -142,13 +196,13 @@ export default function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 bg-white">
+      <section id="features" className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl font-bold text-foreground mb-4">
               Why Choose StatementSync?
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Powerful features designed for accuracy and speed
             </p>
           </div>
@@ -157,13 +211,13 @@ export default function HomePage() {
             {features.map((feature, index) => (
               <Card key={index} className="p-6 hover:shadow-lg transition-shadow">
                 <CardContent className="p-0">
-                  <div className="mb-4">
+                  <div className="mb-4 text-foreground">
                     {feature.icon}
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                  <h3 className="text-xl font-semibold text-foreground mb-2">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-600">
+                  <p className="text-muted-foreground">
                     {feature.description}
                   </p>
                 </CardContent>
@@ -174,90 +228,129 @@ export default function HomePage() {
       </section>
 
       {/* How It Works */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl font-bold text-foreground mb-4">
               How It Works
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-muted-foreground">
               Simple 3-step process to transform your statements
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Upload className="h-8 w-8 text-blue-600" />
+              <div className="bg-muted w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Upload className="h-8 w-8 text-foreground" />
               </div>
               <h3 className="text-xl font-semibold mb-2">1. Upload</h3>
-              <p className="text-gray-600">Upload your PDF, JPG, or PNG bank statements</p>
+              <p className="text-muted-foreground">Upload your PDF, JPG, or PNG bank statements</p>
             </div>
             
             <div className="text-center">
-              <div className="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Zap className="h-8 w-8 text-purple-600" />
+              <div className="bg-muted w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Zap className="h-8 w-8 text-foreground" />
               </div>
               <h3 className="text-xl font-semibold mb-2">2. Process</h3>
-              <p className="text-gray-600">AI extracts and organizes your transaction data</p>
+              <p className="text-muted-foreground">AI extracts and organizes your transaction data</p>
             </div>
             
             <div className="text-center">
-              <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Download className="h-8 w-8 text-green-600" />
+              <div className="bg-muted w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Download className="h-8 w-8 text-foreground" />
               </div>
               <h3 className="text-xl font-semibold mb-2">3. Download</h3>
-              <p className="text-gray-600">Get your clean, formatted Excel file instantly</p>
+              <p className="text-muted-foreground">Get your clean, formatted Excel file instantly</p>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Pricing Section */}
+      <section id="pricing" className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-foreground mb-4">
+              Simple, Transparent Pricing
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Choose the plan that fits your needs. All plans include our core features with no hidden fees.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {pricingPlans.map((plan, index) => (
+              <PricingCard
+                key={index}
+                name={plan.name}
+                price={plan.price}
+                period={plan.period}
+                description={plan.description}
+                features={plan.features}
+                buttonText={plan.buttonText}
+                popular={plan.popular}
+                planId={plan.planId}
+              />
+            ))}
+          </div>
+          
+          <div className="text-center mt-12">
+            <p className="text-muted-foreground mb-4">
+              All plans include a 14-day free trial. No credit card required.
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Need a custom solution? <a href="#contact" className="text-foreground underline">Contact our sales team</a>
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
+      <footer className="bg-muted text-foreground py-12">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-3 mb-4">
-                <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-2 rounded-lg">
-                  <FileText className="h-6 w-6 text-white" />
+                <div className="bg-primary p-2 rounded-lg">
+                  <FileText className="h-6 w-6 text-primary-foreground" />
                 </div>
                 <span className="text-xl font-bold">StatementSync</span>
               </div>
-              <p className="text-gray-400">
+              <p className="text-muted-foreground">
                 Transform your bank statements to Excel format with AI-powered precision.
               </p>
             </div>
             
             <div>
               <h4 className="font-semibold mb-4">Product</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">Features</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Pricing</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">API</a></li>
+              <ul className="space-y-2 text-muted-foreground">
+                <li><a href="#" className="hover:text-foreground transition-colors">Features</a></li>
+                <li><a href="#" className="hover:text-foreground transition-colors">Pricing</a></li>
+                <li><a href="#" className="hover:text-foreground transition-colors">API</a></li>
               </ul>
             </div>
             
             <div>
               <h4 className="font-semibold mb-4">Company</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">About</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Privacy</a></li>
+              <ul className="space-y-2 text-muted-foreground">
+                <li><a href="#" className="hover:text-foreground transition-colors">About</a></li>
+                <li><a href="#" className="hover:text-foreground transition-colors">Contact</a></li>
+                <li><a href="#" className="hover:text-foreground transition-colors">Privacy</a></li>
               </ul>
             </div>
             
             <div>
               <h4 className="font-semibold mb-4">Support</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">Help Center</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Documentation</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Status</a></li>
+              <ul className="space-y-2 text-muted-foreground">
+                <li><a href="#" className="hover:text-foreground transition-colors">Help Center</a></li>
+                <li><a href="#" className="hover:text-foreground transition-colors">Documentation</a></li>
+                <li><a href="#" className="hover:text-foreground transition-colors">Status</a></li>
               </ul>
             </div>
           </div>
           
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+          <div className="border-t border-border mt-8 pt-8 text-center text-muted-foreground">
             <p>&copy; 2024 StatementSync. All rights reserved.</p>
           </div>
         </div>
