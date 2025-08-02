@@ -1,8 +1,12 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Rethink_Sans } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const rethinkSans = Rethink_Sans({ 
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-rethink-sans'
+})
 
 export const metadata: Metadata = {
   title: 'StatementSync - Transform Bank Statements to Excel',
@@ -34,9 +38,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={inter.className} suppressHydrationWarning>
+    <html lang="en" className={rethinkSans.variable} suppressHydrationWarning>
       <body className="min-h-screen bg-background font-sans antialiased">
-        <div id="root">
+        <div id="root" className="relative">
           {children}
         </div>
       </body>
