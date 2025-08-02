@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils'
 
 interface LogoProps {
   size?: 'sm' | 'md' | 'lg' | 'xl'
-  variant?: 'default' | 'white' | 'gradient'
+  variant?: 'default' | 'white' | 'inverted'
   className?: string
   showText?: boolean
 }
@@ -19,14 +19,14 @@ const sizeMap = {
 export function Logo({ size = 'md', variant = 'default', className, showText = true }: LogoProps) {
   const logoSize = sizeMap[size]
   
-  const getGradientId = () => {
+  const getLogoColor = () => {
     switch (variant) {
       case 'white':
-        return 'logoGradientWhite'
-      case 'gradient':
-        return 'logoGradientCustom'
+        return '#ffffff'
+      case 'inverted':
+        return 'hsl(var(--background))'
       default:
-        return 'logoGradient'
+        return 'hsl(var(--foreground))'
     }
   }
 
@@ -39,21 +39,9 @@ export function Logo({ size = 'md', variant = 'default', className, showText = t
         fill="none" 
         xmlns="http://www.w3.org/2000/svg"
         className="flex-shrink-0"
+        style={{ color: getLogoColor() }}
       >
         <defs>
-          <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style={{stopColor: '#3B82F6', stopOpacity: 1}} />
-            <stop offset="50%" style={{stopColor: '#1D4ED8', stopOpacity: 1}} />
-            <stop offset="100%" style={{stopColor: '#1E40AF', stopOpacity: 1}} />
-          </linearGradient>
-          <linearGradient id="logoGradientWhite" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style={{stopColor: '#ffffff', stopOpacity: 1}} />
-            <stop offset="100%" style={{stopColor: '#f8fafc', stopOpacity: 1}} />
-          </linearGradient>
-          <linearGradient id="logoGradientCustom" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style={{stopColor: '#667eea', stopOpacity: 1}} />
-            <stop offset="100%" style={{stopColor: '#764ba2', stopOpacity: 1}} />
-          </linearGradient>
           <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
             <feDropShadow dx="0" dy="4" stdDeviation="8" floodOpacity="0.1"/>
           </filter>
@@ -61,57 +49,97 @@ export function Logo({ size = 'md', variant = 'default', className, showText = t
         
         {/* Main document background */}
         <rect 
-          x="20" 
+          x="15" 
           y="15" 
-          width="80" 
+          width="90" 
           height="90" 
-          rx="8" 
-          ry="8" 
-          fill={`url(#${getGradientId()})`} 
+          rx="12" 
+          ry="12" 
+          fill="currentColor" 
           filter="url(#shadow)"
         />
         
+        {/* Document content area */}
+        <rect 
+          x="25" 
+          y="25" 
+          width="70" 
+          height="70" 
+          rx="6" 
+          ry="6" 
+          fill={variant === 'inverted' ? 'hsl(var(--foreground))' : 'white'}
+        />
+        
         {/* Document header lines */}
-        <rect x="30" y="28" width="35" height="3" rx="1.5" fill="white" opacity="0.9"/>
-        <rect x="30" y="36" width="35" height="3" rx="1.5" fill="white" opacity="0.9"/>
-        <rect x="30" y="52" width="20" height="3" rx="1.5" fill="white" opacity="0.7"/>
+        <rect 
+          x="32" 
+          y="35" 
+          width="40" 
+          height="2" 
+          rx="1" 
+          fill={variant === 'inverted' ? 'hsl(var(--background))' : 'currentColor'} 
+          opacity="0.8"
+        />
+        <rect 
+          x="32" 
+          y="42" 
+          width="40" 
+          height="2" 
+          rx="1" 
+          fill={variant === 'inverted' ? 'hsl(var(--background))' : 'currentColor'} 
+          opacity="0.8"
+        />
+        <rect 
+          x="32" 
+          y="49" 
+          width="25" 
+          height="2" 
+          rx="1" 
+          fill={variant === 'inverted' ? 'hsl(var(--background))' : 'currentColor'} 
+          opacity="0.6"
+        />
         
         {/* Dollar sign circle */}
-        <circle cx="60" cy="70" r="18" fill="white" opacity="0.95"/>
+        <circle 
+          cx="60" 
+          cy="67" 
+          r="15" 
+          fill={variant === 'inverted' ? 'hsl(var(--background))' : 'currentColor'}
+        />
         <text 
           x="60" 
-          y="78" 
+          y="73" 
           fontFamily="Arial, sans-serif" 
-          fontSize="20" 
+          fontSize="18" 
           fontWeight="bold" 
           textAnchor="middle" 
-          fill={`url(#${getGradientId()})`}
+          fill={variant === 'inverted' ? 'hsl(var(--foreground))' : 'white'}
         >
           $
         </text>
         
-        {/* Arrow elements */}
-        <g transform="translate(75, 25)">
+        {/* Transfer arrows */}
+        <g transform="translate(78, 32)">
           <path 
-            d="M5 8 L15 8 L12 5 M15 8 L12 11" 
-            stroke="white" 
-            strokeWidth="2.5" 
+            d="M0 0 L8 0 L6 -2 M8 0 L6 2" 
+            stroke={variant === 'inverted' ? 'hsl(var(--background))' : 'currentColor'} 
+            strokeWidth="2" 
             strokeLinecap="round" 
             strokeLinejoin="round" 
             fill="none" 
-            opacity="0.9"
+            opacity="0.8"
           />
         </g>
         
-        <g transform="translate(75, 40)">
+        <g transform="translate(78, 42)">
           <path 
-            d="M15 8 L5 8 L8 5 M5 8 L8 11" 
-            stroke="white" 
-            strokeWidth="2.5" 
+            d="M8 0 L0 0 L2 -2 M0 0 L2 2" 
+            stroke={variant === 'inverted' ? 'hsl(var(--background))' : 'currentColor'} 
+            strokeWidth="2" 
             strokeLinecap="round" 
             strokeLinejoin="round" 
             fill="none" 
-            opacity="0.9"
+            opacity="0.8"
           />
         </g>
       </svg>
@@ -125,7 +153,7 @@ export function Logo({ size = 'md', variant = 'default', className, showText = t
             size === 'lg' && 'text-2xl',
             size === 'xl' && 'text-3xl',
             variant === 'white' && 'text-white',
-            variant === 'gradient' && 'vercel-gradient-text',
+            variant === 'inverted' && 'text-background',
             variant === 'default' && 'text-foreground'
           )}
         >

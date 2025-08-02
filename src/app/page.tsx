@@ -53,12 +53,12 @@ export default function HomePage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50/30 via-white to-purple-50/30">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+      <header className="border-b bg-background/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <Logo size="md" variant="gradient" />
+            <Logo size="md" variant="default" />
             <nav className="hidden md:flex items-center space-x-6">
               <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Features</a>
               <a href="#pricing" className="text-muted-foreground hover:text-foreground transition-colors">Pricing</a>
@@ -99,7 +99,7 @@ export default function HomePage() {
             </div>
 
             {/* File Upload Section */}
-            <Card className="max-w-3xl mx-auto shadow-xl border-0 bg-white/90 backdrop-blur-sm">
+            <Card className="max-w-3xl mx-auto shadow-xl border-0 bg-card/90 backdrop-blur-sm">
               <CardContent className="p-8">
                 <div className="mb-6">
                                   <h3 className="text-2xl font-semibold text-foreground mb-2">Upload Bank Statements</h3>
@@ -138,7 +138,7 @@ export default function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 bg-white">
+      <section id="features" className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-foreground mb-4">
@@ -210,14 +210,12 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
+      <footer className="bg-foreground text-background py-12">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-3 mb-4">
-                <div className="bg-foreground p-2 rounded-lg">
-                  <FileText className="h-6 w-6 text-background" />
-                </div>
+                <Logo size="md" variant="inverted" showText={false} />
                 <span className="text-xl font-bold">StatementSync</span>
               </div>
               <p className="text-muted-foreground">
