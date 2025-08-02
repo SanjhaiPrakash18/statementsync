@@ -18,10 +18,10 @@ export const metadata: Metadata = {
   robots: 'index, follow',
   icons: {
     icon: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/logo.svg', type: 'image/svg+xml', sizes: '32x32' },
       { url: '/logo.svg', type: 'image/svg+xml', sizes: '120x120' }
     ],
-    shortcut: '/favicon.svg',
+    shortcut: '/logo.svg',
     apple: '/logo.svg'
   },
   openGraph: {
