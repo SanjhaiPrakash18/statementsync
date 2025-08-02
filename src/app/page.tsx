@@ -215,7 +215,7 @@ export default function HomePage() {
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-3 mb-4">
-                <Logo size="md" variant="inverted" showText={false} />
+                <Logo size="md" variant="inverted" showText={false} logoSrc="/footerlogo.svg" />
                 <span className="text-xl font-bold">StatementSync</span>
               </div>
               <p className="text-muted-foreground">
