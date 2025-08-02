@@ -21,6 +21,10 @@ const sizeMap = {
 export function Logo({ size = 'md', variant = 'default', className, showText = true, logoSrc = '/logo.svg' }: LogoProps) {
   const logoSize = sizeMap[size]
   
+  // Special handling for footer logo which already has appropriate colors
+  const isFooterLogo = logoSrc === '/footerlogo.svg'
+  const shouldApplyFilter = !isFooterLogo && (variant === 'white' || variant === 'inverted')
+  
   return (
     <div className={cn('flex items-center gap-2', className)}>
       <div 
@@ -28,7 +32,7 @@ export function Logo({ size = 'md', variant = 'default', className, showText = t
         style={{ 
           width: logoSize, 
           height: logoSize,
-          filter: variant === 'white' ? 'brightness(0) invert(1)' : variant === 'inverted' ? 'brightness(0) invert(1)' : 'none'
+          filter: shouldApplyFilter ? 'brightness(0) invert(1)' : 'none'
         }}
       >
         <Image
