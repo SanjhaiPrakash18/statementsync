@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Upload, FileText, Zap, Shield, Download, CheckCircle, Clock, Star } from 'lucide-react'
 import { UploadProgress } from '@/types'
+import { Logo } from '@/components/Logo'
 
 export default function HomePage() {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([])
@@ -52,17 +53,12 @@ export default function HomePage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50/30 via-white to-purple-50/30">
       {/* Header */}
       <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="bg-foreground p-2 rounded-lg">
-                <FileText className="h-6 w-6 text-background" />
-              </div>
-              <span className="text-xl font-bold gradient-text">StatementSync</span>
-            </div>
+            <Logo size="md" variant="gradient" />
             <nav className="hidden md:flex items-center space-x-6">
               <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Features</a>
               <a href="#pricing" className="text-muted-foreground hover:text-foreground transition-colors">Pricing</a>

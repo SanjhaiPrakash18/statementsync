@@ -6,47 +6,55 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 0 0% 9%;
+    --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 9%;
+    --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
-    --accent: 0 0% 96%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 0% 45%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89%;
-    --input: 0 0% 89%;
-    --ring: 0 0% 9%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
     --radius: 0.75rem;
+    --vercel-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --vercel-blue: 221.2 83.2% 53.3%;
+    --vercel-purple: 262.1 83.3% 57.8%;
+    --vercel-pink: 339.3 82.2% 51.8%;
+    --vercel-green: 142.1 76.2% 36.3%;
+    --vercel-yellow: 45.9 96.7% 64.5%;
+    --vercel-orange: 24.6 95% 53.1%;
   }
 
   .dark {
-    --background: 0 0% 4%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 4%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 4%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 15%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 65%;
-    --accent: 0 0% 15%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 0% 62%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 0 0% 83%;
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 94.1%;
+    --vercel-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   }
 }
 
@@ -58,8 +66,9 @@
   body {
     background-color: hsl(var(--background));
     background-image: 
-      radial-gradient(circle at 1px 1px, hsl(var(--muted)/0.3) 1px, transparent 0);
-    background-size: 20px 20px;
+      radial-gradient(circle at 25px 25px, hsl(var(--primary)/0.05) 2px, transparent 0),
+      radial-gradient(circle at 75px 75px, hsl(var(--vercel-purple)/0.05) 1px, transparent 0);
+    background-size: 100px 100px, 50px 50px;
     color: hsl(var(--foreground));
     font-feature-settings: "rlig" 1, "calt" 1;
     font-family: var(--font-rethink-sans), 'Rethink Sans', sans-serif;
@@ -96,6 +105,22 @@
   /* Smooth scrolling */
   html {
     scroll-behavior: smooth;
+  }
+
+  /* Vercel-inspired gradient backgrounds */
+  .vercel-gradient {
+    background: var(--vercel-gradient);
+  }
+
+  .vercel-gradient-text {
+    background: linear-gradient(135deg, hsl(var(--vercel-blue)), hsl(var(--vercel-purple)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .vercel-glow {
+    box-shadow: 0 0 20px hsl(var(--primary)/0.3);
   }
 
   /* Custom scrollbar for webkit browsers */

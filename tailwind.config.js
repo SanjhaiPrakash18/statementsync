@@ -78,6 +78,10 @@ module.exports = {
       fontFamily: {
         sans: ['var(--font-rethink-sans)', 'Rethink Sans', 'sans-serif'],
       },
+      backgroundImage: {
+        'vercel-gradient': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        'hero-gradient': 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--vercel-purple)) 100%)',
+      },
     },
   },
   plugins: [
