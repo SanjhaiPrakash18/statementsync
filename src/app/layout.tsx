@@ -16,6 +16,14 @@ export const metadata: Metadata = {
   creator: 'StatementSync',
   publisher: 'StatementSync',
   robots: 'index, follow',
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/logo.svg', type: 'image/svg+xml', sizes: '120x120' }
+    ],
+    shortcut: '/favicon.svg',
+    apple: '/logo.svg'
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -23,12 +31,21 @@ export const metadata: Metadata = {
     title: 'StatementSync - Transform Bank Statements to Excel',
     description: 'Convert your bank statements to Excel format with AI-powered OCR.',
     siteName: 'StatementSync',
+    images: [
+      {
+        url: '/logo.svg',
+        width: 120,
+        height: 120,
+        alt: 'StatementSync Logo'
+      }
+    ]
   },
   twitter: {
     card: 'summary_large_image',
     title: 'StatementSync - Transform Bank Statements to Excel',
     description: 'Convert your bank statements to Excel format with AI-powered OCR.',
     creator: '@statementsync',
+    images: ['/logo.svg']
   },
 }
 
